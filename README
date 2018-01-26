@@ -1,0 +1,18 @@
+Libhdnnipc
+
+Library for Neural Network Inter-Process Communication
+
+Copyright Heads First 2018+
+Author(s): Janroel Koppen
+
+
+ABOUT:
+=====
+
+Libhdnnipc 
+
+
+INSTALLATION:
+============
+
+./bootstrap.sh; configure; make; make install
