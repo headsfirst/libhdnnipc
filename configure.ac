@@ -9,7 +9,7 @@ AC_INIT(libhdnnipc, 0.1.0)
 
 dnl Initialize automake
 AM_INIT_AUTOMAKE
-AM_CONFIG_HEADER(hdnnipc.h)
+AM_CONFIG_HEADER(config.h)
 
 dnl Initialize libtool
 AC_PROG_LIBTOOL
