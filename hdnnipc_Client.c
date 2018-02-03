@@ -197,19 +197,36 @@ static int _readChunk(int fd, char* buf, size_t buf_size) {
 	int ret = 0;
 	char* size_str = NULL;
 	size_t size = 0;
+	size_t size_x = 0;
+	void* xcs = NULL;
+	size_t xcs_size = 0;
 
 	if (fd < 0) return -1; // bail out
 
 	if ((size_str = (char*) calloc(32, sizeof(char))) == NULL) { ret = -2; goto _EXIT_; } // OPTIMIZE ME: heap?
 	// size
-	if (readLine(fd, size_str, strlen(size_str)) < strlen(size_str)) { ret = -3; goto _EXIT_; }
+	if (readLine(fd, size_str, 32) < 0) { ret = -3; goto _EXIT_; }
 	size = (size_t)strtoull(size_str, NULL, 16); // strip \n first?
+	if (size > buf_size) {
+		size_x = size - buf_size;
+		size = buf_size;
+	}
 	// data
-	if (buf != NULL) {
-		if ((ret = read(fd, (void*)buf, buf_size)) < buf_size) { goto _EXIT_; }
+	if (size > 0 && buf != NULL) {
+		if ((ret = read(fd, (void*)buf, size)) < size) { goto _EXIT_; }
+	}
+	if (size_x > 0) {
+		if ((xcs = malloc(4096)) == NULL) { ret = -2; goto _EXIT_; }
+		xcs_size = 4096;
+		while (size_x > 0) {
+			size = (size_x < xcs_size) ? size_x : xcs_size; // minimum
+			if (read(fd, xcs, size) < size) { goto _EXIT_; }
+			size_x -= size;
+		}
 	}
 
 _EXIT_:
+	free(xcs);
 	free(size_str);
 	return ret;
 }
