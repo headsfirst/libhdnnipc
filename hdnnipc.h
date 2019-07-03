@@ -1,5 +1,5 @@
-/* Libhdnnipc - Library for Neural Network I/O
- * Copyright 2018+  Heads First, Janroel Koppen
+/* Libhdnnipc - Library for Neural Network Inter-Process Communication
+ * Copyright 2018+ Janroel Koppen
  *
  */
 #ifndef _HDNNIPC_H_
