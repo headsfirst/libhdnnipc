@@ -9,23 +9,13 @@ extern "C" {
 #endif
 
 
+#include "hdnnipc_Base.h"
+
 #include <sys/types.h> // for size_t
 
 
 typedef struct _hdnnipc_Client {
-	// properties
-	unsigned int ctype; // connection type
-	char* path; // socket path, '\0'-terminated
-	char* preamble; // preamble, '\0'-terminated
-
-	// state
-	int fd; // file descriptor 
-	char* cbuf; // ctrl buffer
-	size_t cbuf_size; // ctrl buffer size
-	char* dibuf; // data IN buffer
-	size_t dibuf_size; // data IN buffer size
-	char* dobuf; // data OUT buffer
-	size_t dobuf_size; // data OUT buffer size
+	hdnnipc_Base base; // NB keep this the first member!
 } hdnnipc_Client;
 
 hdnnipc_Client* hdnnipc_Client_init(hdnnipc_Client* me, unsigned int ctype, const char* path, const char* preamble);
