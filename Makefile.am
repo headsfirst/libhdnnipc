@@ -13,12 +13,14 @@ libhdnnipc_la_LDFLAGS	= \
 libhdnnipc_la_SOURCES = \
 	hdnnipc_Client.c \
 	hdnnipc_Server.c \
+	hdnnipc_Base.c \
 	read_line.c
 
 include_HEADERS = \
 	hdnnipc.h \
 	hdnnipc_Client.h \
 	hdnnipc_Server.h \
+	hdnnipc_Base.h \
 	read_line.h
 
 
